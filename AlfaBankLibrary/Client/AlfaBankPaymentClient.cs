@@ -36,7 +36,7 @@ namespace AlfaBankLibrary.Client
                 httpResponse = await MyClient
                     .GetAsync($"getOrderStatusExtended.do?userName={_configuration.Login}&" +
                     $"password={_configuration.Password}&" +
-                    $"orderNumber={request.OrderId}")
+                    $"orderId={request.OrderId}")
                     .ConfigureAwait(false);
             }
 
