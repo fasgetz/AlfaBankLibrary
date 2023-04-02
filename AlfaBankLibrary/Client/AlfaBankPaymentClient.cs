@@ -34,7 +34,7 @@ namespace AlfaBankLibrary.Client
                 MyClient.BaseAddress = new Uri(_configuration.UrlApi);
 
                 httpResponse = await MyClient
-                    .GetAsync($"register.do?userName={_configuration.Login}&" +
+                    .GetAsync($"getOrderStatusExtended.do?userName={_configuration.Login}&" +
                     $"password={_configuration.Password}&" +
                     $"orderNumber={request.OrderId}")
                     .ConfigureAwait(false);
