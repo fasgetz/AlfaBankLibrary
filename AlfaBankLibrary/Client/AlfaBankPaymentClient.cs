@@ -36,7 +36,7 @@ namespace AlfaBankLibrary.Client
                 httpResponse = await MyClient
                     .GetAsync($"register.do?userName={_configuration.Login}&" +
                     $"password={_configuration.Password}&" +
-                    $"orderId={request.OrderId}")
+                    $"orderNumber={request.OrderId}")
                     .ConfigureAwait(false);
             }
 
