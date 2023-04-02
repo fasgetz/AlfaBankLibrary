@@ -19,6 +19,53 @@ namespace AlfaBankLibrary.Client
             _configuration = configuration;
         }
 
+        public async Task<GetOrderResponse> GetOrder(GetOrderRequest request)
+        {
+            // Клиент
+            HttpClientHandler clientHandler = new HttpClientHandler();
+
+            // Для того, чтобы отправить на апи, у которого не установлен SSL
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpResponseMessage httpResponse = null;
+
+            using (var MyClient = new HttpClient(clientHandler))
+            {
+                MyClient.BaseAddress = new Uri(_configuration.UrlApi);
+
+                httpResponse = await MyClient
+                    .GetAsync($"register.do?userName={_configuration.Login}&" +
+                    $"password={_configuration.Password}&" +
+                    $"orderId={request.OrderId}")
+                    .ConfigureAwait(false);
+            }
+
+            var bodyContent = await httpResponse.Content.ReadAsStringAsync();
+
+            // Если не найдена страница
+            if (httpResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+
+            }
+
+            // Если запрос неуспешный, то вывести об этом сообщение
+            if (httpResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+
+            }
+
+            if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+
+            }
+
+            // Если прошли и получили STATUSCODE == 200
+            // Возвращаем ответ
+            var response = JsonConvert.DeserializeObject<GetOrderResponse>(bodyContent);
+
+            return response;
+        }
+
         public async Task<CreateOrderResponse> CreatePayment(CreateOrderRequest request)
         {
             // Клиент

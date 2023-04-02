@@ -11,6 +11,13 @@ namespace AlfaBankLibrary.Client
     public interface IAlfaBankPaymentClient
     {
         /// <summary>
+        /// Получение заказа
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<GetOrderResponse> GetOrder(GetOrderRequest request);
+
+        /// <summary>
         /// Создание платежа
         /// </summary>
         /// <param name="request"></param>
